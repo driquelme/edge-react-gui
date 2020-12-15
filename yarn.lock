@@ -5120,10 +5120,9 @@ edge-components@^0.0.31:
   dependencies:
     react-native-linear-gradient "^2.4.0"
 
-edge-core-js@^0.17.29:
-  version "0.17.29"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.17.29.tgz#1541f7376d222be9ad0dbb156c944c8b130b1905"
-  integrity sha512-svG6q2xHYanKEGLvXuYO5nn+rLkU1d4VpTHQLtN/kNagMPJmNjHrXByP/wXsPms2RTNO7hSFnrL6aYNaSj4lHg==
+"edge-core-js@git://github.com/EdgeApp/edge-core-js.git#sam/new-sync-server":
+  version "0.17.30"
+  resolved "git://github.com/EdgeApp/edge-core-js.git#cebb9c535a4b53e5ef4a76182da3e51600123d2c"
   dependencies:
     aes-js "^3.1.0"
     base-x "^1.0.4"
@@ -5147,10 +5146,9 @@ edge-core-js@^0.17.29:
     yaob "^0.3.6"
     yavent "^0.1.1"
 
-edge-currency-accountbased@^0.7.51:
-  version "0.7.51"
-  resolved "https://registry.yarnpkg.com/edge-currency-accountbased/-/edge-currency-accountbased-0.7.51.tgz#7edb3a52114e08b20925ffb3bf544ce8da5043c0"
-  integrity sha512-ZNDl8MumdGR3AWQnXcVFnksWXJ5Z8Bi4dOPk5URig4ggmnxyvuE6m9C0OZUlHVJhi7dhpIgC4Y+eszdhjBc89A==
+"edge-currency-accountbased@git://github.com/EdgeApp/edge-currency-accountbased.git#sam/new-sync-server":
+  version "0.7.50"
+  resolved "git://github.com/EdgeApp/edge-currency-accountbased.git#5adbf4620ea788eff02f615c0f3afcf138e3a8fa"
   dependencies:
     "@binance-chain/javascript-sdk" "^2.14.4"
     "@fioprotocol/fiosdk" "^1.2.1"
