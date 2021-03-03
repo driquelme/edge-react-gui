@@ -46,8 +46,10 @@ type OwnProps = {
   footer?: React.Node,
   searching: boolean,
   searchText: string,
-  activateSearch: () => void,
-  showSlidingTutorial?: boolean
+  activateSearch?: () => void,
+  showSlidingTutorial?: boolean,
+  isModal?: boolean,
+  onPress?: (walletId: string, currencyCode: string) => void
 }
 
 type StateProps = {
@@ -201,7 +203,7 @@ class WalletListComponent extends React.PureComponent<Props> {
   }
 
   renderRow = (data: FlatListItem<WalletListItem>, rowMap: { [string]: SwipeRow }) => {
-    const { exchangeRates, settings, showBalance, showSlidingTutorial, theme, wallets } = this.props
+    const { exchangeRates, isModal, onPress, settings, showBalance, showSlidingTutorial, theme, wallets } = this.props
     const walletId = data.item.id.replace(/:.*/, '')
     const guiWallet = wallets[walletId]
 
@@ -289,13 +291,15 @@ class WalletListComponent extends React.PureComponent<Props> {
           walletId={walletId}
           walletName={guiWallet.name}
           swipeRow={rowMap[data.item.key]}
+          isModal={isModal}
+          onPress={onPress}
         />
       )
     }
   }
 
   render() {
-    const { activeWalletIds, footer, header, searching, theme, wallets } = this.props
+    const { activeWalletIds, footer, header, isModal, searching, theme, wallets } = this.props
     const walletList = this.getWalletList(activeWalletIds, wallets)
     return (
       <SwipeListView
@@ -303,8 +307,10 @@ class WalletListComponent extends React.PureComponent<Props> {
         ListFooterComponent={footer}
         ListHeaderComponent={header}
         renderItem={this.renderRow}
-        refreshControl={<RefreshControl refreshing={false} onRefresh={this.props.activateSearch} tintColor={theme.searchListRefreshControlIndicator} />}
-        contentOffset={{ y: !searching ? this.props.theme.rem(4.5) : 0 }}
+        refreshControl={
+          !isModal ? <RefreshControl refreshing={false} onRefresh={this.props.activateSearch} tintColor={theme.searchListRefreshControlIndicator} /> : undefined
+        }
+        contentOffset={{ y: !searching && !isModal ? this.props.theme.rem(4.5) : 0 }}
         keyboardShouldPersistTaps="handled"
         useFlatList
       />
