@@ -3,7 +3,7 @@
 import type { JsonObject } from 'edge-core-js'
 import type { EdgeCurrencyWallet, EdgeSpendTarget } from 'edge-core-js/types'
 import * as React from 'react'
-import { ScrollView, StyleSheet, Switch, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { connect } from 'react-redux'
@@ -22,6 +22,7 @@ import { type Dispatch, type RootState } from '../../types/reduxTypes.js'
 import { FormField } from '../common/FormField.js'
 import { SceneWrapper } from '../common/SceneWrapper.js'
 import { showError } from '../services/AirshipInstance.js'
+import { SwitchButton } from '../themed/ThemedButtons.js'
 
 type OwnProps = {
   wallet: EdgeCurrencyWallet,
@@ -54,8 +55,6 @@ export class ChangeMiningFee extends React.Component<Props, State> {
 
     const isDefault = !(props.currencySettings?.defaultFee == null) // Set false if null, true if exists
     const networkFeeOption = props.currencySettings?.defaultFee || 'standard' // Set default fee if exists, otherwise standard if undefined
-
-    console.log(`59. Default fee: ${networkFeeOption}`)
 
     // const currencyCode = props.wallet.currencyInfo.currencyCode
     const customFormat = this.getCustomFormat()
@@ -108,16 +107,8 @@ export class ChangeMiningFee extends React.Component<Props, State> {
           {customFormat != null ? this.renderRadioRow('custom', s.strings.mining_fee_custom_label_choice) : null}
           {customFormat != null ? this.renderCustomFee(customFormat) : null}
           {this.renderFeeWarning()}
-          <View>
-            <View style={styles.row}>
-              <Text>Make Default Setting</Text>
-              <View style={styles.paddingRightIcon}>
-                <TouchableWithoutFeedback>
-                  <Switch value={this.state.isDefault} onChange={() => this.toggleDefaultFee()} />
-                </TouchableWithoutFeedback>
-              </View>
-            </View>
-          </View>
+
+          <SwitchButton label="Make Default Setting" value={this.state.isDefault} onChange={() => this.toggleDefaultFee()} />
 
           <PrimaryButton onPress={this.onSubmit} style={styles.saveButton}>
             <PrimaryButton.Text>{s.strings.save}</PrimaryButton.Text>
